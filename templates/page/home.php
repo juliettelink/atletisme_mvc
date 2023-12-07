@@ -1,7 +1,5 @@
+<?php require_once _ROOTPATH_.'\templates\header.php'; ?>
 
-  <?php
-    require_once('header.php');
-?>
         <h1 class="text-center">Liste d'athlétisme</h1> 
         <h2>Liste des Courses :</h2>
         
@@ -95,7 +93,5 @@
                 <li>Aucun score n'a été trouvé</li>
             <?php endif; ?>
 
-<?php
-    require_once('footer.php');
-?> 
+<?php require_once _ROOTPATH_.'\templates\footer.php'; ?>
 

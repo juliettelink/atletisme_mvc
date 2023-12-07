@@ -13,23 +13,31 @@ Class Controller{
 
     public function route():void
     {
-        if (isset($_GET['controller'])){
-            switch ($_GET['controller']) {
-                case 'page':
-                    // charge le controler page
-                    $pageController = new PageController();
-                    $pageController->route();
-                    break;
-                case 'course':
-                    // charger le controler course
-                    var_dump ('on charge CourseController');
-                    break;
-                default:
-                    //Erreur
-                    break;
+        try{
+            if (isset($_GET['controller'])){
+                switch ($_GET['controller']) {
+                    case 'page':
+                        // charge le controler page
+                        $pageController = new PageController();
+                        $pageController->route();
+                        break;
+                    case 'course':
+                        // charger le controler course
+                        var_dump ('on charge CourseController');
+                        break;
+                    default:
+                        throw new \Exception("le controleur n'existe pas");
+                        break;
+                }
+            }else{
+                //Charger le page d'accueil si pas de controller dans l'url
+                $pageController = new PageController();
+                $pageController->home();
             }
-        }else{
-            //Charger le page d'accueil
+        }catch(\Exception $e){
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
         }
     }
 
@@ -46,7 +54,9 @@ Class Controller{
                 require_once $filePath;
             }
         } catch(\Exception $e) {
-            echo $e->getMessage();
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
         }
     }
 
