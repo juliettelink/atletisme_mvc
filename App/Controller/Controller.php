@@ -23,7 +23,8 @@ Class Controller{
                         break;
                     case 'course':
                         // charger le controler course
-                        var_dump ('on charge CourseController');
+                        $pageController = new CourseController();
+                        $pageController->route();
                         break;
                     default:
                         throw new \Exception("le controleur n'existe pas");
